@@ -50,8 +50,8 @@ var AwesomeProject = React.createClass({
     }
 
     //return this.renderLoadingView();
-    if (this.state.view == 'singleQuestion') {
-      return this.renderSingleQuestion();
+    if (this.state.view == 'singlePost') {
+      return this.renderSinglePost();
     }
 
     //this.state.view == 'list'
@@ -81,14 +81,19 @@ var AwesomeProject = React.createClass({
     );
   },
 
-  renderSingleQuestion: function(x) {
-    movie = {title: 'booga', name: 'hello'}
+  renderSinglePost: function(x) {
+    var post = this.state.singlePost;
     return (
       <View style={styles.container}>
         <Text onPress={() => this.setState({view: 'list'})} >
-          Single Question {x}
-          Title: {movie.title}
+          Back'\n\n'
         </Text>
+        <Text>
+          Title: {post.title+'\n\n'}
+          Single Question {x}
+          {/*Keys: {Object.keys(this.state.singlePost)}*/}
+        </Text>
+         
         {/*
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{movie.title}</Text>
@@ -100,23 +105,23 @@ var AwesomeProject = React.createClass({
     );
   },
 
-  renderMovie: function(movie) {
+  renderMovie: function(post) {
     return (
       <View style={styles.container}>
         <Image
-          source={{uri: movie.posters.thumbnail}}
+          source={{uri: post.posters.thumbnail}}
           style={styles.thumbnail}
         />
         <View style={styles.rightContainer}
           
         >
           <Text style={styles.title}
-            onPress={() => this.setState({view: 'singleQuestion'})}            
-          >{movie.title}</Text>
+            onPress={() => this.setState({singlePost: post, view: 'singlePost'})}            
+          >{post.title}</Text>
           <Text style={styles.year} 
                 onPress={() => this.setState({score: ++this.state.score})}
                 //onPress={() => this.render(10)} //this.renderSingleQuestion(10)}
-          >{movie.year}</Text>
+          >{post.year}</Text>
         </View>
       </View>
     );
