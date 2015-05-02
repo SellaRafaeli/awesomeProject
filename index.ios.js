@@ -16,6 +16,8 @@ var {
   StyleSheet,
   Text,
   View,
+  TextInput,
+  TouchableHighlight
 } = React;
 
 var AwesomeProject = React.createClass({
@@ -60,7 +62,7 @@ var AwesomeProject = React.createClass({
           <View style={styles.container}>
             <Text>
               MyScore: {this.state.score} {/*More: {this.state.scorez+10}}*/}
-            </Text>
+            </Text>            
           </View>
           <ListView
             dataSource={this.state.dataSource}
@@ -84,16 +86,16 @@ var AwesomeProject = React.createClass({
   renderSinglePost: function(x) {
     var post = this.state.singlePost;
     return (
+      <View>
       <View style={styles.container}>
-        <Text onPress={() => this.setState({view: 'list'})} >
-          Back'\n\n'
-        </Text>
         <Text>
           Title: {post.title+'\n\n'}
           Single Question {x}
           {/*Keys: {Object.keys(this.state.singlePost)}*/}
-        </Text>
-         
+        </Text>         
+        <Text onPress={() => this.setState({view: 'list'})} >
+          Back'\n\n'
+        </Text>        
         {/*
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{movie.title}</Text>
@@ -101,6 +103,23 @@ var AwesomeProject = React.createClass({
                 onPress={() => this.setState({score: ++this.state.score})}
           >{movie.year}</Text>
         </View>*/}
+      </View>
+      <View>
+          <View style={styles.flowRight}>
+              <TextInput
+                style={styles.searchInput}
+                onChangeText={(text) => this.setState({input: text})}
+                placeholder='Search via name or postcode'/>
+              <TouchableHighlight style={styles.button}
+                  underlayColor='#99d9f4'>
+                <Text style={styles.buttonText}>Go {this.state.input}</Text>
+              </TouchableHighlight>
+            </View>
+            <TouchableHighlight style={styles.button}
+                underlayColor='#99d9f4'>
+              <Text style={styles.buttonText}>Location</Text>
+            </TouchableHighlight>
+      </View>
       </View>
     );
   },
@@ -154,6 +173,39 @@ var styles = StyleSheet.create({
   },
   year: {
     textAlign: 'center',
+  },
+  flowRight: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  alignSelf: 'stretch'
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  searchInput: {
+    height: 36,
+    padding: 4,
+    marginRight: 5,
+    flex: 4,
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#48BBEC',
+    borderRadius: 8,
+    color: '#48BBEC'
   }
 });
 
